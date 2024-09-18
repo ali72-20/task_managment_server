@@ -4,9 +4,9 @@ import com.example.task_managment_server.Entities.User;
 import com.example.task_managment_server.Repositary.UserRepository;
 import com.example.task_managment_server.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -15,17 +15,18 @@ public class UserServiceImpl implements UserServices {
     private UserRepository userRepository;
 
     @Override
-    public User register(User user) {
-        user.setPassword(user.getPassword());
-        return userRepository.save(user);
+    public String register(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+         userRepository.save(user);
+         return "Ok";
     }
 
     @Override
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if(user != null && Objects.equals(password, user.getPassword())){
+        if (user != null && new BCryptPasswordEncoder().encode(user.getPassword()).matches(password)) {
             return user;
         }
-        throw  new RuntimeException("Invalid user");
+        throw new BadCredentialsException("Invalid password for user: " + username);
     }
 }
