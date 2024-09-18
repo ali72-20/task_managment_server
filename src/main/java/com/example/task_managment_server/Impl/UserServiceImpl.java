@@ -14,10 +14,10 @@ public class UserServiceImpl implements UserServices {
     private UserRepository userRepository;
 
     @Override
-    public String register(User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+    public User register(User user) {
+         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
          userRepository.save(user);
-         return "Ok";
+         return user;
     }
 
     @Override

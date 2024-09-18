@@ -19,11 +19,11 @@ public class UserController {
 
     @PostMapping("/register")
     public Map<String,String> register(@RequestBody User user) {
-        userService.register(user);
+        User newUser = userService.register(user);
         HashMap<String,String> map = new HashMap<>();
         map.put("Statue", "Ok");
-        map.put("username", user.getUsername());
-        map.put("id", user.getId().toString());
+        map.put("username", newUser.getUsername());
+        map.put("id", newUser.getId().toString());
         return map;
     }
 

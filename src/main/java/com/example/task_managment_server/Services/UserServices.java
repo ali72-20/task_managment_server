@@ -5,6 +5,6 @@ import com.example.task_managment_server.Entities.User;
 
 
 public interface UserServices {
-    String register(User user);
+    User register(User user);
     User login(String username, String password);
 }
