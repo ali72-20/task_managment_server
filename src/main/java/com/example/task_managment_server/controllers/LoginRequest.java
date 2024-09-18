@@ -3,6 +3,7 @@ package com.example.task_managment_server.controllers;
 public class LoginRequest {
     private String username;
     private String password;
+    private Long id;
 
     // Constructors
     public LoginRequest() {
@@ -28,5 +29,13 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
