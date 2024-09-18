@@ -14,7 +14,7 @@ public class TaskController {
     @Autowired
     private TaskServices taskService;
 
-    @GetMapping
+    @GetMapping("/getTasks")
     public ResponseEntity<List<Task>> getTasks(@RequestParam Optional<String> status) {
         List<Task> tasks = taskService.getTasks(status);
         return ResponseEntity.ok(tasks);
