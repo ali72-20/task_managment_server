@@ -15,8 +15,8 @@ public class TaskController {
     private TaskServices taskService;
 
     @GetMapping("/getTasks")
-    public ResponseEntity<List<Task>> getTasks(@RequestParam Optional<String> status) {
-        List<Task> tasks = taskService.getTasks(status);
+    public ResponseEntity<List<Task>> getTasks(@RequestParam Optional<String> status, @RequestParam Long id) {
+        List<Task> tasks = taskService.getTasks(status,id);
         return ResponseEntity.ok(tasks);
     }
 

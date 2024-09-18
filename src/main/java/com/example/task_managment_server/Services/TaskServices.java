@@ -9,6 +9,6 @@ public interface TaskServices {
     Task createTask(Task task);
     Task editTask(Long id, Task task);
     void deleteTask(Long id);
-    List<Task> getTasks( Optional<String> statue);
+    List<Task> getTasks( Optional<String> statue, Long id);
 
 }

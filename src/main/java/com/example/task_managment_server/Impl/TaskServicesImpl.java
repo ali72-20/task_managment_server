@@ -38,7 +38,9 @@ public class TaskServicesImpl implements TaskServices {
         }
     }
     @Override
-    public List<Task> getTasks(Optional<String> statue) {
-        return statue.map(s-> taskRepository.findByStatue(s)).orElseGet(taskRepository :: findAll);
+    public List<Task> getTasks(Optional<String> statue, Long userId) {
+        return statue
+                .map(s -> taskRepository.findByStatueAndId(s, userId))
+                .orElseGet(() -> taskRepository.findByUserId(userId));
     }
 }
