@@ -1,5 +1,4 @@
 package com.example.task_managment_server.Impl;
-
 import com.example.task_managment_server.Entities.User;
 import com.example.task_managment_server.Repositary.UserRepository;
 import com.example.task_managment_server.Services.UserServices;
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserServices {
     @Override
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user != null && new BCryptPasswordEncoder().encode(user.getPassword()).matches(password)) {
+        if (user != null && new BCryptPasswordEncoder().matches(password, user.getPassword())){
             return user;
         }
         throw new BadCredentialsException("Invalid password for user: " + username);
